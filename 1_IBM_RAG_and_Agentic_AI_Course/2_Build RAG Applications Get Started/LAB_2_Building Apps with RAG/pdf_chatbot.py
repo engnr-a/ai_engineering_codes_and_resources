@@ -50,11 +50,6 @@ def text_splitter(data):
     chunks = text_splitter.split_documents(data)
     return chunks
 
-def vector_database(chunks):
-    embedding_model = watsonx_embedding()
-    vectordb = Chroma.from_documents(chunks, embedding_model)
-    return vectordb
-
 def watsonx_embedding():
     # embed_params = {
     #     #EmbedTextParamsMetaNames.TRUNCATE_INPUT_TOKENS: 30,
@@ -68,6 +63,18 @@ def watsonx_embedding():
         #params=embed_params,
     )
     return watsonx_embedding
+
+def vector_database(chunks):
+    DB_PATH = "./pdf_chat_chroma_db"
+    embedding_model = watsonx_embedding()
+    vectordb = Chroma.from_documents(chunks, 
+                                     embedding_model, 
+                                     persist_directory=DB_PATH # <-- The crucial change!
+                    )
+    
+    # You might also want to explicitly persist it, though from_documents often handles this
+    vectordb.persist() 
+    return vectordb
 
 ## Retriever
 def retriever(file):
