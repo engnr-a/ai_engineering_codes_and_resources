@@ -69,10 +69,10 @@ def vector_database(chunks):
     embedding_model = watsonx_embedding()
     vectordb = Chroma.from_documents(chunks, 
                                      embedding_model, 
-                                     persist_directory=DB_PATH # <-- The crucial change!
+                                     persist_directory=DB_PATH 
                     )
     
-    # You might also want to explicitly persist it, though from_documents often handles this
+    # 
     vectordb.persist() 
     return vectordb
 
@@ -88,14 +88,15 @@ def retriever(file):
 def get_llm():
     model_id = "meta-llama/llama-3-3-70b-instruct"
     parameters = {
-        GenParams.DECODING_METHOD: DecodingMethods.GREEDY,  
-        GenParams.MIN_NEW_TOKENS: 130, # this controls the minimum number of tokens in the generated output
-        GenParams.MAX_NEW_TOKENS: 256,  # this controls the maximum number of tokens in the generated output
-        GenParams.TEMPERATURE: 0.5 # this randomness or creativity of the model's responses
+        #GenParams.DECODING_METHOD: DecodingMethods.GREEDY, 
+        GenParams.DECODING_METHOD: DecodingMethods.SAMPLE, 
+        #GenParams.MIN_NEW_TOKENS: 130, # this controls the minimum number of tokens in the generated output
+        GenParams.MAX_NEW_TOKENS: 512,  # this controls the maximum number of tokens in the generated output
+        #GenParams.TEMPERATURE: 0.5, # this randomness or creativity of the model's responses
+        GenParams.TEMPERATURE: 0.7,  # More creativity
+        GenParams.REPETITION_PENALTY: 1.2,  # Avoids repetition
     }
     
-    
-
     watsonx_llm = WatsonxLLM(
         model_id=model_id,
         url=url,
