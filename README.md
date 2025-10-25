@@ -4,9 +4,8 @@
 
 Activate uv environment:
 ```bash
-uv run bash  # 
-source .venv/bin/activate  # classic activation
-deactivate # deactivate
+source .venv/bin/activate  
+deactivate
 
 ```
 ##### 2. Packages
@@ -20,8 +19,6 @@ uv sync        # installs all dependencies from pyproject.toml
 
 ##### 3. Jupyter
 ```bash
-# start jupyter notebook
-uv run jupyter notebook
 uv run jupyter lab
 # register uv environment as a kernel:
 uv add ipykernel # dependenciy if no present
