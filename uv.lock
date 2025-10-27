@@ -62,11 +62,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "atlassian-python-api", specifier = ">=4.0.7" },
-    { name = "beautifulsoup4", specifier = ">=4.13.5" },
-    { name = "certifi", specifier = ">=2025.8.3" },
-    { name = "chromadb", specifier = "==1.0.12" },
-    { name = "ddgs", specifier = ">=9.6.0" },
+    { name = "chromadb", specifier = "==0.4.24" },
     { name = "gradio", specifier = "==4.44.1" },
     { name = "ibm-watson-machine-learning", specifier = "==1.0.367" },
     { name = "ibm-watsonx-ai", specifier = "==1.1.2" },

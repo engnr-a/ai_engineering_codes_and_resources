@@ -80,3 +80,7 @@ def change_llm_model(new_model_id: str) -> None:
     Args:
         new_model_id: New LLM model ID to use.
     """
+if __name__ == "__main__":
+    llm = create_watsonx_llm()
+    print(llm.invoke("Hello Watson. What is the current population of Prague?"))
+    
